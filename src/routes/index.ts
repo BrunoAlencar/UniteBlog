@@ -4,7 +4,7 @@ import * as Post from "../model/post";
 
 export class IndexRoute {
 
-//------------------------- User Routes -------------------------
+  //------------------------- User Routes -------------------------
 
   public static create(router: Router) {
     router.post('/user/add', function(req, res) {
@@ -31,19 +31,19 @@ export class IndexRoute {
       var password = req.body.password;
 
       User.findOne(
-        {
-          email: email,
-          password: password
-        }, function(err, user) {
-          if (err) {
-            res.json({ info: 'Erro ao executar logon', error: err });
-          };
-          if (user) {
-            res.json({ info: 'Usuário logado', data: user });
-          } else {
-            res.json({ info: 'Erro de logon' });
-          }
-        });
+      {
+        email: email,
+        password: password
+      }, function(err, user) {
+        if (err) {
+          res.json({ info: 'Erro ao executar logon', error: err });
+        };
+        if (user) {
+          res.json({ info: 'Usuário logado', data: user });
+        } else {
+          res.json({ info: 'Erro de logon' });
+        }
+      });
     });
 
     router.post('/user/update', function(req, res) {
@@ -59,29 +59,29 @@ export class IndexRoute {
 
     router.post('/user/delete', function(req, res) {
       User.remove({_id: req.body._id}, function(err) {
-            if (err) {
-                res.json({ info: 'Erro ao remover usuário', error: err });
-            }
-            res.json({ info: 'Usuário removido com sucesso' });
-        });
+        if (err) {
+          res.json({ info: 'Erro ao remover usuário', error: err });
+        }
+        res.json({ info: 'Usuário removido com sucesso' });
+      });
     });
 
-//------------------------- Post Routes -------------------------
+    //------------------------- Post Routes -------------------------
 
-router.post('/post/add', function(req, res) {
-  var newPost = new Post(req.body);
-  newPost.save((err) => {
-    if (err) {
-      res.json({ info: 'Erro ao criar postagem', error: err });
-    }
-    res.json({ info: 'Postagem criada com sucesso', data: newPost });
-  });
-});
+    router.post('/post/add', function(req, res) {
+      var newPost = new Post(req.body);
+      newPost.save((err) => {
+        if (err) {
+          res.json({ info: 'Erro ao criar postagem', error: err });
+        }
+        res.json({ info: 'Postagem criada com sucesso', data: newPost });
+      });
+    });
 
-//------------------------- 404 -------------------------
+    //------------------------- 404 -------------------------
 
     router.get('*', function(req, res) {
-      res.send('<h1>Vá para casa, browser, você está bêbado</h1>');
+      res.send('<h1>Vá para casa, browser, você está bêbado!!!</h1>');
     });
   }
 }
